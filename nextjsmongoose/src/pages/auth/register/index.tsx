@@ -1,5 +1,7 @@
 import { AuthApi, RegisterUserRequest } from "@/generated-api";
+import { AxiosInstance } from "axios";
 import React, { useState } from "react";
+import axios from "axios";
 
 function registartion() {
   const [username, setUsername] = useState("");
@@ -124,8 +126,15 @@ function registartion() {
       email: email,
       password: password,
     };
-
-    new AuthApi()
+    const token: string = "djsnjifnjn";
+    const axiosInstance: AxiosInstance = axios.create({
+      headers: {
+        Authorization: `Bearer ${token}`,
+        // Add other default headers if needed
+        // "Content-Type": "application/json",
+      },
+    });
+    new AuthApi(undefined, undefined, axiosInstance)
       .registerUser(data)
       .then((data) => {
         console.log(data);
@@ -136,82 +145,88 @@ function registartion() {
       });
   };
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <form
-        className="w-full max-w-sm p-4 bg-white rounded shadow"
-        onSubmit={handleFormSubmit}
-      >
-        <div className="mb-4">
-          <label htmlFor="username" className="block mb-1 font-medium">
-            Username:
-          </label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={handleInputChange}
-            onBlur={handleBlur}
-            className={`w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 ${
-              errors["username"] ? "border-red-500" : ""
-            }`}
-            placeholder="Enter your username"
-          />
-          {errors["username"] && (
-            <p className="text-red-500 text-sm">{errors["username"]}</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label htmlFor="email" className="block mb-1 font-medium">
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={handleInputChange}
-            onBlur={handleBlur}
-            className={`w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 ${
-              errors["email"] ? "border-red-500" : ""
-            }`}
-            placeholder="Enter your email"
-          />
-          {errors["email"] && (
-            <p className="text-red-500 text-sm">{errors["email"]}</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block mb-1 font-medium">
-            Password:
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handleInputChange}
-            onBlur={handleBlur}
-            className={`w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 ${
-              errors["password"] ? "border-red-500" : ""
-            }`}
-            placeholder="Enter your password"
-          />
-          {errors["password"] && (
-            <p className="text-red-500 text-sm">{errors["password"]}</p>
-          )}
-        </div>
-        <div>
-          <button
-            type="submit"
-            className="w-full px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
-          >
-            Register
-          </button>
-        </div>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="p-6 bg-white rounded-md shadow-lg w-96">
+        <h1 className="text-3xl font-semibold mb-4 ">Register</h1>
+        <form className="space-y-4" onSubmit={handleFormSubmit}>
+          <div className="mb-4">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Username:
+            </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={username}
+              onChange={handleInputChange}
+              onBlur={handleBlur}
+              className={`mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                errors["username"] ? "border-red-500" : ""
+              }`}
+            />
+            {errors["username"] && (
+              <p className="text-red-500 text-sm">{errors["username"]}</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email:
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={handleInputChange}
+              onBlur={handleBlur}
+              className={`mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                errors["email"] ? "border-red-500" : ""
+              }`}
+            />
+            {errors["email"] && (
+              <p className="text-red-500 text-sm">{errors["email"]}</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Password:
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={handleInputChange}
+              onBlur={handleBlur}
+              className={`mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                errors["password"] ? "border-red-500" : ""
+              }`}
+            />
+            {errors["password"] && (
+              <p className="text-red-500 text-sm">{errors["password"]}</p>
+            )}
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="w-full px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
+            >
+              Register
+            </button>
+          </div>
 
-        {message && <p className="text-center mt-4">{message}</p>}
-      </form>
+          {message && <p className="text-center mt-4">{message}</p>}
+        </form>
+      </div>
     </div>
   );
 }

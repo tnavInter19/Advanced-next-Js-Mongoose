@@ -3,3 +3,8 @@
 @tailwind utilities;
 
 
+@media (max-width: 640px) {
+ .h-screen {
+   height: 100vh;
+ }
+}
