@@ -22,29 +22,32 @@ export interface RootState {
 
 // Middleware configuration, including Redux Thunk and Redux Persist
 const middleware = [
- ...getDefaultMiddleware({
-   serializableCheck: false, // Disable serializableCheck for Redux Persist
- }),
- thunkMiddleware,
+  ...getDefaultMiddleware({
+    serializableCheck: false, // Disable serializableCheck for Redux Persist
+  }),
+  thunkMiddleware,
 ];
 
 // Redux DevTools Extension setup
 const devTools =
- (process.browser && (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()) || null;
+  (process.browser &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__()) ||
+  null;
 
 // Persist configuration
 const persistConfig = {
- key: "root",
- storage,
+  key: "root",
+  storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Create the Redux store
 export const store = configureStore({
- reducer: persistedReducer,
- middleware,
- devTools: devTools, // Pass the Redux DevTools extension
+  reducer: persistedReducer,
+  middleware,
+  devTools: devTools, // Pass the Redux DevTools extension
 });
 
 export type AppDispatch = typeof store.dispatch;
