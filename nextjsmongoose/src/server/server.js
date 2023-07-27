@@ -1,7 +1,9 @@
 // src/server/server.js
 require('dotenv').config();
 require('express-async-errors');
+const User = require('./models/User')
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 // extra security packages
 const helmet = require('helmet');
@@ -65,6 +67,33 @@ nextApp.prepare().then(() => {
  // routes
  app.use('/api/v1/auth', authRouter);
  app.use('/api/v1/jobs', authenticateUser, jobsRouter);
+
+(async () => {
+   // Connect to the database
+   await mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  const existingSuperAdmin = await User.findOne({ name: 'superadmin' });
+
+  if (!existingSuperAdmin) {
+    // Generate a hashed password
+    console.log(existingSuperAdmin);
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash('superadminpassword', saltRounds);
+ 
+    // Create the "superadmin" user with the role set to "superadmin"
+    const superadminUser = {
+      name: 'superadmin',
+      email:'superadmin@gmail.com',
+      password: hashedPassword,
+      role: 'superadmin',
+    };
+ console.log(superadminUser);
+    // Save the user to the database
+    await User.create(superadminUser);
+   }});
+
  
  // app.use(notFoundMiddleware);
  app.use(errorHandlerMiddleware);
@@ -72,12 +101,14 @@ nextApp.prepare().then(() => {
  const port = process.env.PORT || 3000;
  // For all other routes, let Next.js handle them
  app.all('*', (req, res) => {
+
   return handle(req, res);
 });
 
 // Start the server on port 3000
 app.listen(3000, (err) => {
   if (err) throw err;
+
   console.log(`Server is listening on port 3000...`);
 });
  
