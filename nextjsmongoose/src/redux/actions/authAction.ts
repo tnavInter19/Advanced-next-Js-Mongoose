@@ -1,15 +1,24 @@
-export enum AuthActionTypes {
- SET_LOGIN_STATUS = "SET_LOGIN_STATUS",
+// authActionTypes.ts
+
+// Define action type constants
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+
+// Define action interfaces
+export interface LoginAction {
+  type: typeof LOGIN;
+  payload: { token: string };
 }
 
-export interface SetLoginStatusAction {
- type: AuthActionTypes.SET_LOGIN_STATUS;
- payload: boolean;
+export interface LogoutAction {
+  type: typeof LOGOUT;
 }
 
-export type AuthAction = SetLoginStatusAction;
+export const login = (token: string): AuthAction => {
+ return {
+   type: LOGIN,
+   payload: { token },
+ };
+};
 
-export const setLoginStatus = (isLoggedIn: boolean): AuthAction => ({
- type: AuthActionTypes.SET_LOGIN_STATUS,
- payload: isLoggedIn,
-});
+export type AuthAction = LoginAction | LogoutAction;

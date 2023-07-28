@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
        <TopNavBar></ TopNavBar>
        </div>  
        <div className="flex">
-       <div className="sticky top-16 bg-gray-100 p-4 h-[calc(100vh-61.6px)]">
+       <div className="sticky top-16 bg-gray-100 md:p-4 h-[calc(100vh-61.6px)]">
         <Sidebar>
         <SidebarItem icon={<LayoutDashboard />} to='/jobs' text='counter' alert></ SidebarItem >
         <SidebarItem icon={<LayoutDashboard />} to='/dashboard' text='Dashboard' alert></ SidebarItem >

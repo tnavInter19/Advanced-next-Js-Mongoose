@@ -1,5 +1,5 @@
 import { AuthApi } from "@/generated-api";
-import { setLoginStatus } from "@/redux/actions/authAction";
+import { login } from "@/redux/actions/authAction";
 import axios, { AxiosInstance } from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -54,8 +54,10 @@ function LoginPage() {
     .loginUser({ email, password })
     .then((data) => {
      // localStorage.setItem("token", data);
-     dispatch(setLoginStatus(true))
+     if(data.data?.token!){
+     dispatch(login(data.data?.token!))
       router.push("/dashboard");
+     }
       console.log(data.data)
     })
     .catch((error) => {
