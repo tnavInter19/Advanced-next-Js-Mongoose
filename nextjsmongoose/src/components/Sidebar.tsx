@@ -1,5 +1,7 @@
 import { MoreVertical, ChevronLast, ChevronFirst } from "lucide-react";
 import { useContext, createContext, useState, ReactNode } from "react";
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 interface SidebarContextValue {
   expanded: boolean;
@@ -15,9 +17,11 @@ interface SidebarProps {
 
 export default function Sidebar({ children }: SidebarProps) {
   const [expanded, setExpanded] = useState<boolean>(true);
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 
   return (
-    <aside className="h-screen">
+   isLoggedIn &&
+    <aside className="min-h-[calc(100vh-61.6px)] hidden sm:block">
       <nav className="h-full w-35 flex flex-col bg-white border-r shadow-sm">
         <div className="p-4 pb-2 flex justify-between items-center">
           <img

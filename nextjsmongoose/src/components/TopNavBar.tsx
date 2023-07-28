@@ -1,13 +1,17 @@
 import Link from 'next/link';
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 const TopNavBar: React.FC = () => {
  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+ const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 
  const toggleMobileMenu = () => {
    setIsMobileMenuOpen(!isMobileMenuOpen);
  };
   return (
+   isLoggedIn &&
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto">
         <div className="flex justify-between items-center">

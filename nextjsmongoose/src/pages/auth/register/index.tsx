@@ -222,6 +222,9 @@ function registartion() {
             >
               Register
             </button>
+            <p className="text-sm font-light text-gray-500 dark:text-gray-400 mt-3">
+                      Already have an account <a href="/auth/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login</a>
+                  </p>
           </div>
 
           {message && <p className="text-center mt-4">{message}</p>}
