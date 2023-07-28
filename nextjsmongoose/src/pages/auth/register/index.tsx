@@ -2,8 +2,20 @@ import { AuthApi, RegisterUserRequest } from "@/generated-api";
 import { AxiosInstance } from "axios";
 import React, { useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { RootState } from "@/redux/store";
+import { useEffect } from "react";
 
 function registartion() {
+ const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+ const router = useRouter();
+ useEffect(() => {
+   if (isLoggedIn) {
+     // Redirect to the login page or an "unauthorized" page
+     router.push("/dashboard");
+   }
+ }, []);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

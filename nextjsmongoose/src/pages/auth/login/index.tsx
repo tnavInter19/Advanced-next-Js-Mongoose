@@ -4,11 +4,21 @@ import axios, { AxiosInstance } from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useEffect } from "react";
 
 function LoginPage() {
+ const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+ const router = useRouter();
+ useEffect(() => {
+   if (isLoggedIn) {
+     // Redirect to the login page or an "unauthorized" page
+     router.push("/dashboard");
+   }
+ }, []);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
   const dispatch = useDispatch();
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

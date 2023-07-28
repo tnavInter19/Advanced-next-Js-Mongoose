@@ -2,6 +2,7 @@ import { MoreVertical, ChevronLast, ChevronFirst } from "lucide-react";
 import { useContext, createContext, useState, ReactNode } from "react";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import Link from "next/link";
 
 interface SidebarContextValue {
   expanded: boolean;
@@ -21,7 +22,7 @@ export default function Sidebar({ children }: SidebarProps) {
 
   return (
    isLoggedIn &&
-    <aside className="min-h-[calc(100vh-61.6px)] hidden sm:block">
+    <aside className="h-[calc(100vh-78.6px)] hidden sm:block">
       <nav className="h-full w-35 flex flex-col bg-white border-r shadow-sm">
         <div className="p-4 pb-2 flex justify-between items-center">
           <img
@@ -70,6 +71,7 @@ export default function Sidebar({ children }: SidebarProps) {
 interface SidebarItemProps {
   icon: JSX.Element;
   text: string;
+  to:string;
   active?: boolean;
   alert?: boolean;
 }
@@ -77,12 +79,14 @@ interface SidebarItemProps {
 export function SidebarItem({
   icon,
   text,
+  to,
   active = false,
   alert = false,
 }: SidebarItemProps) {
   const { expanded } = useContext(SidebarContext);
 
   return (
+   <Link href={to}>
     <li
       className={`
         relative flex items-center py-2 px-3 my-1
@@ -101,7 +105,9 @@ export function SidebarItem({
           expanded ? "w-52 ml-3" : "w-0"
         }`}
       >
+        
         {text}
+      
       </span>
       {alert && (
         <div
@@ -124,5 +130,6 @@ export function SidebarItem({
         </div>
       )}
     </li>
+    </Link>
   );
 }

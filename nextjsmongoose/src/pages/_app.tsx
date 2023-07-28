@@ -13,19 +13,21 @@ export default function App({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
     
-       <div className="flex flex-col">
+       <div className="sticky z-10 top-0 bg-gray-1000 bg-opacity-0  text-white">
        <TopNavBar></ TopNavBar>
-          
-       <div className="flex flex-1 h-[calc(100vh-61.6px)]">
+       </div>  
+       <div className="flex">
+       <div className="sticky top-16 bg-gray-100 p-4 h-[calc(100vh-61.6px)]">
         <Sidebar>
-        <SidebarItem icon={<LayoutDashboard />} text='counter ' alert></ SidebarItem >
+        <SidebarItem icon={<LayoutDashboard />} to='/jobs' text='counter' alert></ SidebarItem >
+        <SidebarItem icon={<LayoutDashboard />} to='/dashboard' text='Dashboard' alert></ SidebarItem >
         </ Sidebar>
-     
-        <main className="flex-1 ">
+        </div>
+        <main className="flex-1 p-4 overflow-y-auto">
         <Component {...pageProps} />
         </main>
         </div>
-        </div>
+   
       </PersistGate>
     </Provider>
   );
