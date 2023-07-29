@@ -54,10 +54,9 @@ function LoginPage() {
     .loginUser({ email, password })
     .then((data) => {
      // localStorage.setItem("token", data);
-     if(data.data?.token!){
-     dispatch(login(data.data?.token!))
+      var token:string =data.data['token']
+     dispatch(login(token))
       router.push("/dashboard");
-     }
       console.log(data.data)
     })
     .catch((error) => {
