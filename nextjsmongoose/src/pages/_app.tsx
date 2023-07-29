@@ -7,6 +7,7 @@ import { persistor, store } from "@/redux/store";
 import Sidebar, { SidebarItem } from "@/components/Sidebar";
 import { LayoutDashboard } from "lucide-react";
 import TopNavBar from "@/components/TopNavBar";
+import { AuthProvider } from '../context/AuthContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -17,14 +18,16 @@ export default function App({ Component, pageProps }: AppProps) {
        <TopNavBar></ TopNavBar>
        </div>  
        <div className="flex">
-       <div className="sticky top-16 bg-gray-100 md:p-4 h-[calc(100vh-61.6px)]">
+      
         <Sidebar>
         <SidebarItem icon={<LayoutDashboard />} to='/jobs' text='counter' alert></ SidebarItem >
         <SidebarItem icon={<LayoutDashboard />} to='/dashboard' text='Dashboard' alert></ SidebarItem >
         </ Sidebar>
-        </div>
+      
         <main className="flex-1 p-4 overflow-y-auto">
+        <AuthProvider>
         <Component {...pageProps} />
+        </AuthProvider>
         </main>
         </div>
    
