@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { ROLES } from "../utils/roles";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import Link from 'next/link';
 
 function Navigation() {
  const router = useRouter();
@@ -15,7 +16,7 @@ function Navigation() {
      <div className="container mx-auto">
        <ul className="flex space-x-4">
          <li>
-           <a
+           <Link
              href="/"
              onClick={(e) => {
                e.preventDefault();
@@ -24,11 +25,11 @@ function Navigation() {
              className="text-white hover:text-blue-100 cursor-pointer"
            >
              Home
-           </a>
+           </Link>
          </li>
          {userRole === ROLES.ADMIN && (
            <li>
-             <a
+             <Link
                href="/adminPanel"
                onClick={(e) => {
                  e.preventDefault();
@@ -37,12 +38,12 @@ function Navigation() {
                className="text-white hover:text-blue-100 cursor-pointer"
              >
                Admin Panel
-             </a>
+             </Link>
            </li>
          )}
          {userRole === ROLES.ADMIN && (
            <li>
-             <a
+             <Link
                href="/dashboard"
                onClick={(e) => {
                  e.preventDefault();
@@ -51,7 +52,7 @@ function Navigation() {
                className="text-white hover:text-blue-100 cursor-pointer"
              >
                Dashboard
-             </a>
+             </Link>
            </li>
          )}
        </ul>

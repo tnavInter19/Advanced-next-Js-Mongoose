@@ -11,10 +11,13 @@ export default function Home() {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const router = useRouter();
   useEffect(() => {
+   const init=()=>{
     if (!isLoggedIn) {
       // Redirect to the login page or an "unauthorized" page
       router.push("/auth/login");
     }
+   }
+   init();
   }, []);
   // Check if the user is logged in and redirect accordingly
 

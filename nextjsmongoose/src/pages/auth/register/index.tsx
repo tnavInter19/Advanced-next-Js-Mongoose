@@ -6,8 +6,9 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { RootState } from "@/redux/store";
 import { useEffect } from "react";
+import Link from "next/link";
 
-function registartion() {
+function Registartion() {
  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
  const router = useRouter();
  useEffect(() => {
@@ -235,7 +236,7 @@ function registartion() {
               Register
             </button>
             <p className="text-sm font-light text-gray-500 dark:text-gray-400 mt-3">
-                      Already have an account <a href="/auth/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login</a>
+                      Already have an account <Link href="/auth/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login</Link>
                   </p>
           </div>
 
@@ -246,4 +247,4 @@ function registartion() {
   );
 }
 
-export default registartion;
+export default Registartion;

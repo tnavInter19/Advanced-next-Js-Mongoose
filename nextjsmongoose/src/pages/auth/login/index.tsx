@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useEffect } from "react";
+import Link from "next/link";
 
 function LoginPage() {
  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -107,7 +108,7 @@ function LoginPage() {
             Login
           </button>
           <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                      Don’t have an account yet? <a href="/auth/register" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Register</a>
+                      Don’t have an account yet? <Link href="/auth/register" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Register</Link>
                   </p>
         </form>
       </div>
