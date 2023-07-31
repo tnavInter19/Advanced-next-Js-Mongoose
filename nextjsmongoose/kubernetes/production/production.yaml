@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextjsmongoose
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextjsmongoose
+  template:
+    metadata:
+      labels:
+        app: nextjsmongoose
+    spec:
+      containers:
+        - name: nextjsmongoose
+          image: nextjsmongoose:latest # Replace with the name of your Docker image
+          ports:
+            - containerPort: 3000

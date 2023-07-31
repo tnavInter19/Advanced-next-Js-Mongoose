@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nextjsmongoose-config
+data:
+  APP_ENV: development
+  DB_URL: mongodb://mongo-db-host:27017/mydb
