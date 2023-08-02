@@ -5,7 +5,6 @@ import { PersistGate } from "redux-persist/integration/react";
 import "../styles/globals.css";
 import { persistor, store } from "@/redux/store";
 import Sidebar, { SidebarItem } from "@/components/Sidebar";
-import { LayoutDashboard } from "lucide-react";
 import TopNavBar from "@/components/TopNavBar";
 import { AuthProvider } from '../context/AuthContext';
 
@@ -19,8 +18,8 @@ export default function App({ Component, pageProps }: AppProps) {
        <div className="flex">
   
         <Sidebar>
-        <SidebarItem icon={<LayoutDashboard />} to='/jobs' text='counter' alert></ SidebarItem >
-        <SidebarItem icon={<LayoutDashboard />} to='/dashboard' text='Dashboard' alert></ SidebarItem >
+        <SidebarItem  to='/jobs' text='counter' alert></ SidebarItem >
+        <SidebarItem  to='/dashboard' text='Dashboard' alert></ SidebarItem >
         </ Sidebar>
       <div className="p-4 top-16 flex-1  bg-gray-100 ">
         <main className="bg-white">
