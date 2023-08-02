@@ -1,0 +1,35 @@
+trigger:
+  branches:
+    include:
+      - main  # Replace 'main' with the branch you want to trigger the pipeline on.
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - script: |
+      # Install Node.js and dependencies
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+      nvm install 14
+
+      # Install project dependencies and build
+      npm install
+      npm run build
+    displayName: 'Install and Build'
+
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(System.DefaultWorkingDirectory)/out'
+      includeRootFolder: false
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      replaceExistingArchive: true
+    displayName: 'Archive Build Artifacts'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      ArtifactName: 'drop'
+    displayName: 'Publish Build Artifacts'
