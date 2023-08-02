@@ -26,13 +26,13 @@ export default function Sidebar({ children }: SidebarProps) {
     <aside className="h-[calc(100vh-78.6px)] hidden sm:block">
       <nav className={`h-full w-35 flex flex-col bg-white border-r shadow-sm ${isLoggedIn}?"hidden":""`}>
         <div className="p-4 pb-2 flex justify-between items-center">
-          <img
+          {/* <img
             src="https://img.logoipsum.com/243.svg"
             className={`overflow-hidden transition-all ${
               expanded ? "w-32" : "w-0"
             }`}
             alt=""
-          />
+          /> */}
           <button
             onClick={() => setExpanded((curr) => !curr)}
             className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
