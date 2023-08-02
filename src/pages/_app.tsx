@@ -12,8 +12,7 @@ import { ConfigurationParameters } from './../generated-api/configuration';
 import { BASE_PATH, BaseAPI } from './../generated-api/base';
 
 export default function App({ Component, pageProps }: AppProps) {
-const config=`${window.location.host}`
-new BaseAPI(undefined,config,undefined)
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
