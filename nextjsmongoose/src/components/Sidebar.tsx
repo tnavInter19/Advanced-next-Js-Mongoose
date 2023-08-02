@@ -1,4 +1,4 @@
-
+import { MoreVertical, ChevronLast, ChevronFirst } from "lucide-react";
 import { useContext, createContext, useState, ReactNode } from "react";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
@@ -37,7 +37,7 @@ export default function Sidebar({ children }: SidebarProps) {
             onClick={() => setExpanded((curr) => !curr)}
             className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
           >
-         nejn
+            {expanded ? <ChevronFirst /> : <ChevronLast />}
           </button>
         </div>
 
@@ -61,7 +61,7 @@ export default function Sidebar({ children }: SidebarProps) {
               <h4 className="font-semibold">John Doe</h4>
               <span className="text-xs text-gray-600">johndoe@gmail.com</span>
             </div>
-          
+            <MoreVertical size={20} />
           </div>
         </div>
       </nav>
@@ -79,6 +79,7 @@ interface SidebarItemProps {
 }
 
 export function SidebarItem({
+  icon,
   text,
   to,
   active = false,
@@ -100,7 +101,7 @@ export function SidebarItem({
         }
     `}
     >
-      #
+      {icon}
       <span
         className={`overflow-hidden transition-all ${
           expanded ? "w-52 ml-3" : "w-0"
