@@ -19,7 +19,7 @@ import type { Configuration } from './configuration';
 import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 
-export const BASE_PATH = "http://localhost:3000/api/v1".replace(/\/+$/, "");
+export const BASE_PATH = "https://advanced-next-js-mongoose-mo72-git-main-tnav19.vercel.app/api/v1".replace(/\/+$/, "");
 
 /**
  *
