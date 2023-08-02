@@ -71,7 +71,6 @@ export default function Sidebar({ children }: SidebarProps) {
 }
 
 interface SidebarItemProps {
-  icon: JSX.Element;
   text: string;
   to:string;
   active?: boolean;
